@@ -3,7 +3,7 @@ import requests
 class States:
     """ Fetches all the states in India along with their unique identifier """
     
-    endpoint = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+    states_endpoint = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
     
     def __init__(self):
         self.states = dict()
@@ -14,15 +14,15 @@ class States:
         
     
     def get_states(self):
-        resp = requests.get(self.endpoint, headers = self.hdrs)
+        resp = requests.get(self.states_endpoint, headers = self.hdrs)
         if resp.status_code == 200:
             for state in resp.json()['states']:
                 self.states[state['state_id']] = state['state_name']     
             return self.states
         elif resp.status_code >= 400 and resp.status_code < 500:
             print(f"[{resp.status_code}] Error fetching states data. Client request forbidden.")
-            return dict()
+            return self.states
         else: 
             print(f"[{resp.status_code}] Error.")
-            return dict()
+            return self.states
     
