@@ -1,4 +1,10 @@
+# Standard library imports
+import sys 
+
+# Third party imports 
 import requests
+
+# Local application imports
 from states import States
 
 class State(States):
@@ -15,7 +21,7 @@ class State(States):
         states_data = self.get_states()
         if len(states_data) == 0:
             print("Error fetching States. System Exit!")
-            exit(0)
+            sys.exit(1)
             
         print("+" + "-"*48 + "+")
         print("|  ID  |" + " "*18 + "NAME" + " "*19 + "|")
@@ -32,7 +38,7 @@ class State(States):
             self._id = int(input("Enter your State ID : "))
             if self._id not in range(min(states_data.keys()), max(states_data.keys()) + 1):
                 print("Invalid State ID! Do you really live in India?\nSystem Exit!")
-                exit(0)
+                sys.exit(1)
             print(f'\nYou live in {states_data[self._id]}\n')
             
             self.name = states_data[self._id]
@@ -52,6 +58,6 @@ class State(States):
                 return self.districts
         except (ValueError, Exception) as err: 
             print(f"Error - {err}. System Exit!")
-            exit(0)
+            sys.exit(1)
             
             
