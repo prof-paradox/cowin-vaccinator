@@ -1,7 +1,7 @@
 import requests
 
 class States:
-    """ Fetches all the states in India along with their unique identifier"""
+    """ Fetches all the states in India along with their unique identifier """
     
     endpoint = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
     
